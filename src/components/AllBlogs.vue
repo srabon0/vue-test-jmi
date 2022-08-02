@@ -1,5 +1,5 @@
 <template>
-  <section class="resume-section" id="blog.id">
+  <section class="resume-section" :id="blog.id">
     <div class="resume-section-content">
       <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
         <div class="flex-grow-1">
@@ -19,22 +19,29 @@
             Blog Comment
             <hr />
           </h5>
-          <div class="subheading mb-1" style="font-size: 11pt">
-            <i class="fa fa-user"></i> Commenter 1
+          <div
+            :key="comment.id"
+            v-for="comment in blog.all_comments"
+            class="subheading mb-1"
+            style="font-size: 11pt"
+          >
+            <i class="fa fa-user"></i> {{ comment.user }}
             <div class="float-right">
-              <i class="fa fa-clock"></i> 2021-03-23 10.05 pm
+              <i class="fa fa-clock"></i> {{ comment.comment_datetime }}
             </div>
-          </div>
-          <p>Comment 1</p>
-          <div class="subheading mb-1" style="font-size: 11pt">
-            <i class="fa fa-user"></i> Commenter 2
-            <div class="float-right">
-              <i class="fa fa-clock"></i> 2021-03-23 10.05 pm
-            </div>
-          </div>
-          <p>Comment 2</p>
-          <div class="subheading mb-1">
-            <button class="btn btn-sm btn-info">New Comment</button>
+            <p>
+              {{ comment.comment }}
+              <span
+                style="cursor: pointer"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="delete this comment"
+                @click="deleteComment(comment.id)"
+                class="mx-5"
+              >
+                <i class="fa fa-trash"></i>
+              </span>
+            </p>
           </div>
         </div>
       </div>
