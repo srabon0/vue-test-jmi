@@ -49,10 +49,18 @@
   </section>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "AllBlogs",
   props: {
     blog: Object,
+  },
+  methods: {
+    async deleteComment(id) {
+      const url = `http://vue-test.gingerbd.com/api/remove-comment/${id}`;
+      await axios.get(url).then((response) => console.log(response.data));
+      window.location.reload();
+    },
   },
 };
 </script>
